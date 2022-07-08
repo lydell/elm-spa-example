@@ -26,25 +26,25 @@ I decided not to include a build script, since all you need for a development bu
 [Install Elm](https://guide.elm-lang.org/install.html) (e.g. with `npm install --global elm`), then from the root project directory, run this:
 
 ```
-$ elm make src/Main.elm --output elm.js
+$ elm make src/Main.elm --output elm-output.js
 ```
 
 If you want to include the time-traveling debugger, add `--debug` like so:
 
 ```
-$ elm make src/Main.elm --output elm.js --debug
+$ elm make src/Main.elm --output elm-output.js --debug
 ```
 
 To view the site in a browser, bring up `index.html` from any local HTTP server, for example [`http-server`](https://www.npmjs.com/package/http-server).
 
 ## Production Build
 
-This is a two-step process. First we compile `elm.js` using `elm make` with `--optimize`, and then we Uglify the result.
+This is a two-step process. First we compile `elm-output.js` using `elm make` with `--optimize`, and then we Uglify the result.
 
 #### Step 1
 
 ```
-$ elm make src/Main.elm --output elm.js --optimize
+$ elm make src/Main.elm --output elm-output.js --optimize
 ```
 
 This [generates production-optimized JS](https://elm-lang.org/blog/small-assets-without-the-headache) that is ready to be minified further using Uglify.
@@ -54,7 +54,7 @@ This [generates production-optimized JS](https://elm-lang.org/blog/small-assets-
 (Make sure you have [Uglify](http://lisperator.net/uglifyjs/) installed first, e.g. with `npm install --global uglify-js`)
 
 ```
-$ uglifyjs elm.js --compress 'pure_funcs="F2,F3,F4,F5,F6,F7,F8,F9,A2,A3,A4,A5,A6,A7,A8,A9",pure_getters=true,keep_fargs=false,unsafe_comps=true,unsafe=true,passes=2' --output=elm.js && uglifyjs elm.js --mangle --output=elm.js
+$ uglifyjs elm-output.js --compress 'pure_funcs="F2,F3,F4,F5,F6,F7,F8,F9,A2,A3,A4,A5,A6,A7,A8,A9",pure_getters=true,keep_fargs=false,unsafe_comps=true,unsafe=true,passes=2' --output=elm-output.js && uglifyjs elm-output.js --mangle --output=elm-output.js
 ```
 
 This one lengthy command (make sure to scroll horizontally to get all of it if you're copy/pasting!) runs `uglifyjs` twice - first with `--compress` and then again with `--mangle`.
