@@ -37,9 +37,11 @@ toString (Username username) =
     username
 
 
-urlParser : Url.Parser.Parser (Username -> a) a
+{-| If you use this outside of URL parsing you don’t get to come to After Work :)
+-}
+urlParser : String -> Username
 urlParser =
-    Url.Parser.custom "USERNAME" (\str -> Just (Username str))
+    Username
 
 
 toHtml : Username -> Html msg

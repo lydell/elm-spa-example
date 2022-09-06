@@ -16,9 +16,11 @@ type Slug
 -- CREATE
 
 
-urlParser : Parser (Slug -> a) a
+{-| If you use this outside of URL parsing you don’t get to come to After Work :)
+-}
+urlParser : String -> Slug
 urlParser =
-    Url.Parser.custom "SLUG" (\str -> Just (Slug str))
+    Slug
 
 
 decoder : Decoder Slug
